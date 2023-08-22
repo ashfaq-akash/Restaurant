@@ -16,9 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework.routers import DefaultRouter
+from littlelemon import views
+
+router=DefaultRouter()
+router.register(r'tables',views.BookingViewSet)
+router.register(r'users', views.UserView, basename='user')  
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurant/', include('littlelemon.urls')),
+    path('restaurant/api/', include(router.urls)),
 ]
